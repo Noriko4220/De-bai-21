@@ -6,8 +6,7 @@ import java.util.Scanner;
 import static coSoDuLieu.createDB.newDB;
 import static coSoDuLieu.connectionSwitch.connect;
 import static coSoDuLieu.connectionSwitch.disconnect;
-import static coSoDuLieu.itemQuery.displayTable;
-import static coSoDuLieu.itemQuery.filteredSearch;
+import static coSoDuLieu.itemQuery.*;
 import static coSoDuLieu.modifyTable.*;
 
 public class mainProgram {
@@ -79,6 +78,7 @@ public class mainProgram {
                     System.out.println("- /search : Tim kiem trong bang");
                     System.out.println("- /delete : Xoa thanh phan trong bang");
                     System.out.println("- /update : Cap nhat thanh phan trong bang");
+                    System.out.println("- /reward : Xem danh sach nhan vien duoc khen thuong");
                     System.out.print("\n");
                 }
 
@@ -193,6 +193,50 @@ public class mainProgram {
 
                 case "/showall" -> displayTable();
 
+                case "/reward" -> {
+                    String inputCheck;
+                    int value;
+                    System.out.println("Chon kieu can bo: ");
+                    System.out.println("- Go #giangday de nhap kieu can bo giang day");
+                    System.out.println("- Go #nghiencuu de nhap kieu can bo nghien cuu");
+                    System.out.println("- Go #phucvu de nhap kieu can bo phuc vu");
+                    System.out.println("- Go #all de hien thi tat ca");
+
+                    inputCheck = scanner.nextLine();
+                    switch (inputCheck) {
+                        case "#giangday" -> {
+                            System.out.println("Nhap so gio giang day chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongGiangDay(value);
+                        }
+
+                        case "#nghiencuu" -> {
+                            System.out.println("Nhap so bai bao chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongBao(value);
+                        }
+
+                        case "#phucvu" -> {
+                            System.out.println("Nhap so gio phuc vu chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongPhucVu(value);
+                        }
+
+                        case "#all" -> {
+                            System.out.println("Nhap so gio giang day chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongGiangDay(value);
+
+                            System.out.println("Nhap so bai bao chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongBao(value);
+
+                            System.out.println("Nhap so gio phuc vu chuan: ");
+                            value = Integer.parseInt(scanner.nextLine());
+                            khenThuongPhucVu(value);
+                        }
+                    }
+                }
 
                 case"/search" -> {
                     String inputCheck;

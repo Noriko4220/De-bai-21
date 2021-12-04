@@ -1,5 +1,5 @@
-# De Bai 21
- bai tap nhom 16
+# Đề bài 21
+ Bài tập của nhóm 16
 ![debai](https://raw.githubusercontent.com/Noriko4220/De-bai-21/main/debai.png)
 
 Thư viện đã sử dụng : JDBC phiên bản 3.36.0.3

@@ -16,7 +16,7 @@ public class mainProgram {
     static boolean dbname;
 
     public static void main (String[] args) {
-        tableGui giaoDien = new tableGui();
+        connectGui giaoDien = new connectGui();
         Scanner scanner = new Scanner(System.in);
         itemQuery timKiemParent = new rewardSearch();
         rewardSearch timKiem = (rewardSearch) timKiemParent;

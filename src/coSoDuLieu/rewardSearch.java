@@ -87,7 +87,7 @@ public class rewardSearch extends itemQuery {
         displayMiniTable("Phuc vu");
     }
 
-    private void displayMiniTable (String searchType) {
+    public void displayMiniTable (String searchType) {
         if(!checkConnection()){
             System.out.println("Chua ket noi toi database nao");
             return;

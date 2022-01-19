@@ -4,16 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static coSoDuLieu.connectionSwitch.connect;
 import static coSoDuLieu.connectionSwitch.checkConnection;
 
 public class itemQuery {
 
-    public void displayTable(){
-
-    }
+    public void displayTable(){}
 
     public void filteredSearch(int typeDirector, int searchModifier, int value) {
         if(!checkConnection()){

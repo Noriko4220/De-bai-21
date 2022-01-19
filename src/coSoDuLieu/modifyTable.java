@@ -21,7 +21,7 @@ public class modifyTable {
             }
         }
 
-        if(!checkConnection()){
+        if(!checkConnection()) {
             System.out.println("Chua ket noi toi database nao");
             return;
         }
@@ -58,6 +58,8 @@ public class modifyTable {
 
     public static void updateElement(int maSo, int director, String kieuCanBo, String name, int num) {
         String sqlStatement;
+        String nullSqlStatement = "UPDATE Bang_danh_sach_can_bo SET " +
+                "So_gio_giang_day = ? , So_bai_bao = ? , So_gio_phuc_vu = ? WHERE Ma_so_nhan_vien = ?";
 
         switch (director) {
             case 1 -> sqlStatement = "UPDATE Bang_danh_sach_can_bo SET Ho_ten = ? , Kieu_can_bo = ? , " +
@@ -75,6 +77,17 @@ public class modifyTable {
         if (!checkConnection()) {
             System.out.println("Chua ket noi toi database nao");
             return;
+        }
+
+        try (Connection dbConnection = connect();
+             PreparedStatement dbStatement = dbConnection.prepareStatement(nullSqlStatement)) {
+            dbStatement.setNull(1, java.sql.Types.NULL);
+            dbStatement.setNull(2, java.sql.Types.NULL);
+            dbStatement.setNull(3, java.sql.Types.NULL);
+            dbStatement.setInt(4, maSo);
+            dbStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
 
         try (Connection dbConnection = connect();

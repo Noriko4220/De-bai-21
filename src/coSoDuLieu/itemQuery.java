@@ -11,40 +11,11 @@ import static coSoDuLieu.connectionSwitch.checkConnection;
 
 public class itemQuery {
 
-    public static void displayTable(){
-        if(!checkConnection()){
-            System.out.println("Chua ket noi toi database nao");
-            return;
-        }
-        
-        String sqlStatement = "SELECT Ma_so_nhan_vien, Ho_ten, Kieu_can_bo, So_gio_giang_day, So_bai_bao, So_gio_phuc_vu FROM Bang_danh_sach_can_bo";
-        try (Connection dbConnection = connect();
-             Statement dbStatement  = dbConnection.createStatement();
-             ResultSet itemQuery    = dbStatement.executeQuery(sqlStatement)){
+    public void displayTable(){
 
-            System.out.printf("%-20s", "Ma so nhan vien");
-            System.out.printf("%-20s", "Ho ten");
-            System.out.printf("%-20s", "Kieu can bo");
-            System.out.printf("%-20s", "So gio giang day");
-            System.out.printf("%-20s", "So bai bao");
-            System.out.printf("%-20s", "So gio phuc vu");
-            System.out.println();
-            
-            while (itemQuery.next()) {
-                System.out.printf("%-20s", itemQuery.getInt("Ma_so_nhan_vien"));
-                System.out.printf("%-20s", itemQuery.getString("Ho_ten"));
-                System.out.printf("%-20s", itemQuery.getString("Kieu_can_bo"));
-                System.out.printf("%-20s", itemQuery.getInt("So_gio_giang_day"));
-                System.out.printf("%-20s", itemQuery.getInt("So_bai_bao"));
-                System.out.printf("%-20s", itemQuery.getInt("So_gio_phuc_vu"));
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
-    public static void filteredSearch(int typeDirector, int searchModifier, int value) {
+    public void filteredSearch(int typeDirector, int searchModifier, int value) {
         if(!checkConnection()){
             System.out.println("Chua ket noi toi database nao");
             return;
@@ -107,14 +78,14 @@ public class itemQuery {
         }
     }
 
-    public static void khenThuongGiangDay(int soGioGiangDayChuan) {
+    /* public static void khenThuongGiangDay(int soGioGiangDayChuan) {
         if(!checkConnection()){
             System.out.println("Chua ket noi toi database nao");
             return;
         }
 
         int soGioGiangDay = soGioGiangDayChuan * 5/4;
-        String sqlStatement = "SELECT Ma_so_nhan_vien, Ho_ten, Kieu_can_bo, So_gio_giang_day, So_bai_bao, So_gio_phuc_vu " +
+        String sqlStatement = "SELECT Ma_so_nhan_vien, Ho_ten, Kieu_can_bo, So_gio_giang_day " +
                 "FROM Bang_danh_sach_can_bo WHERE So_gio_giang_day > ?";
 
         try (Connection dbConnection = connect();
@@ -127,8 +98,6 @@ public class itemQuery {
             System.out.printf("%-20s", "Ho ten");
             System.out.printf("%-20s", "Kieu can bo");
             System.out.printf("%-20s", "So gio giang day");
-            System.out.printf("%-20s", "So bai bao");
-            System.out.printf("%-20s", "So gio phuc vu");
             System.out.println();
 
             while (itemQuery.next()) {
@@ -136,8 +105,6 @@ public class itemQuery {
                 System.out.printf("%-20s", itemQuery.getString("Ho_ten"));
                 System.out.printf("%-20s", itemQuery.getString("Kieu_can_bo"));
                 System.out.printf("%-20s", itemQuery.getInt("So_gio_giang_day"));
-                System.out.printf("%-20s", itemQuery.getInt("So_bai_bao"));
-                System.out.printf("%-20s", itemQuery.getInt("So_gio_phuc_vu"));
                 System.out.println();
             }
 
@@ -225,5 +192,5 @@ public class itemQuery {
             System.out.println(sqlStatement);
             System.out.println(e.getMessage());
         }
-    }
+    } */
 }

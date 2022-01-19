@@ -6,7 +6,6 @@ import java.util.Scanner;
 import static coSoDuLieu.createDB.newDB;
 import static coSoDuLieu.connectionSwitch.connect;
 import static coSoDuLieu.connectionSwitch.disconnect;
-import static coSoDuLieu.itemQuery.*;
 import static coSoDuLieu.modifyTable.*;
 
 public class mainProgram {
@@ -17,7 +16,11 @@ public class mainProgram {
     static boolean dbname;
 
     public static void main (String[] args) {
+        tableGui giaoDien = new tableGui();
         Scanner scanner = new Scanner(System.in);
+        itemQuery timKiemParent = new rewardSearch();
+        rewardSearch timKiem = (rewardSearch) timKiemParent;
+        giaoDien.displayTableGui();
 
         System.out.println("Chuong trinh kiem soat khai bao co so du lieu giang vien de tai 21 cua nhom 16");
         System.out.println("------------------------------------------------------------------------------");
@@ -38,6 +41,7 @@ public class mainProgram {
         System.out.println("- /search : Tim kiem trong bang");
         System.out.println("- /delete : Xoa thanh phan trong bang");
         System.out.println("- /update : Cap nhat thanh phan trong bang");
+        System.out.println("- /reward : Xem danh sach nhan vien duoc khen thuong");
         System.out.print("\n");
 
         while (currState) {
@@ -75,6 +79,7 @@ public class mainProgram {
                     System.out.println("- /disconnect : Ngat ket noi toi database");
                     System.out.println("- /insert : Chen bang moi vao database");
                     System.out.println("- /showall : Chieu toan bo bang trong database");
+                    System.out.println("- /showsort : Chieu bang trong database theo loai");
                     System.out.println("- /search : Tim kiem trong bang");
                     System.out.println("- /delete : Xoa thanh phan trong bang");
                     System.out.println("- /update : Cap nhat thanh phan trong bang");
@@ -191,7 +196,9 @@ public class mainProgram {
                     deleteElement(value);
                 }
 
-                case "/showall" -> displayTable();
+                case "/showall" -> timKiemParent.displayTable();
+
+                case "/showsort" -> timKiem.displayMiniTable();
 
                 case "/reward" -> {
                     String inputCheck;
@@ -206,34 +213,34 @@ public class mainProgram {
                     switch (inputCheck) {
                         case "#giangday" -> {
                             System.out.println("Nhap so gio giang day chuan: ");
-                            value = Integer.parseInt(scanner.nextLine());
-                            khenThuongGiangDay(value);
+                            value = Integer.parseInt(scanner.nextLine()) * 5/4;
+                            timKiem.filteredSearch("So_gio_giang_day", value);
                         }
 
                         case "#nghiencuu" -> {
                             System.out.println("Nhap so bai bao chuan: ");
-                            value = Integer.parseInt(scanner.nextLine());
-                            khenThuongBao(value);
+                            value = Integer.parseInt(scanner.nextLine()) + 2;
+                            timKiem.filteredSearch("So_bai_bao", value);
                         }
 
                         case "#phucvu" -> {
                             System.out.println("Nhap so gio phuc vu chuan: ");
-                            value = Integer.parseInt(scanner.nextLine());
-                            khenThuongPhucVu(value);
+                            value = Integer.parseInt(scanner.nextLine()) * 3/2;
+                            timKiem.filteredSearch("So_gio_phuc_vu", value);
                         }
 
                         case "#all" -> {
                             System.out.println("Nhap so gio giang day chuan: ");
                             value = Integer.parseInt(scanner.nextLine());
-                            khenThuongGiangDay(value);
+                            timKiem.filteredSearch("So_gio_giang_day", value);
 
                             System.out.println("Nhap so bai bao chuan: ");
                             value = Integer.parseInt(scanner.nextLine());
-                            khenThuongBao(value);
+                            timKiem.filteredSearch("So_bai_bao", value);
 
                             System.out.println("Nhap so gio phuc vu chuan: ");
                             value = Integer.parseInt(scanner.nextLine());
-                            khenThuongPhucVu(value);
+                            timKiem.filteredSearch("So_gio_phuc_vu", value);
                         }
                     }
                 }
@@ -259,8 +266,7 @@ public class mainProgram {
                             modifierType = 3;
                             System.out.println("Nhap ma so nhan vien: ");
                             value = Integer.parseInt(scanner.nextLine());
-                            filteredSearch(searchType, modifierType, value);
-                            return;
+                            timKiemParent.filteredSearch(searchType, modifierType, value);
                         }
                         default -> {
                             System.out.println("Kieu khong hop le");
@@ -286,7 +292,7 @@ public class mainProgram {
                     System.out.println("Nhap gia tri: ");
                     value = Integer.parseInt(scanner.nextLine());
 
-                    filteredSearch(searchType, modifierType, value);
+                    timKiemParent.filteredSearch(searchType, modifierType, value);
                 }
 
                 default -> {
